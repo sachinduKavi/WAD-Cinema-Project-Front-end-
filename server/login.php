@@ -27,14 +27,18 @@ if(isset($_POST['email']) && isset($_POST['password']) && strlen($_POST['email']
         session_start();
         
         $_SESSION['theater_ID'] = $passResult['theater_ID'];
-        $_SESSION['name'] = $passResult['theater_ID'];
+        $_SESSION['name'] = $passResult['name'];
         $_SESSION['location'] = $passResult['location'];
         $_SESSION['no_seats'] = $passResult['no_seats'];
         $_SESSION['ticket_price'] = $passResult['ticket_price'];
         $_SESSION['admin_email'] = $passResult['admin_email'];
         
+        // Setting user token 
+        setcookie("user_token", json_encode($passResult), time()+86400, '/');
+        
         
         echo "Password verified";
+        header("Location: ../dashboard.php");
         
     } else {
         header("Location: ../loginPage.php?message=invalidPass");
