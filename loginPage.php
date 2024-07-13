@@ -18,13 +18,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
   <title>Material Design for Bootstrap</title>
-  <!-- MDB icon -->
+
   <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
-  <!-- Google Fonts Roboto -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
-  <!-- MDB -->
   <link rel="stylesheet" href="css/bootstrap-login-form.min.css" />
 </head>
 
@@ -50,10 +47,10 @@
   
                     <div class="d-flex align-items-center mb-3 pb-1">
                       <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
-                      <span class="h1 fw-bold mb-0">Logo</span>
+                      <span class="h1 fw-bold mb-0">Admin Panel</span>
                     </div>
   
-                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign Into Movie Assistant Panel</h5>
   
                     <div class="form-outline mb-4">
                       <input type="email" id="form2Example17" class="form-control form-control-lg" name="email"/>
@@ -87,11 +84,8 @@
       </div>
     </div>
   </section>
-  <!-- End your project here-->
 
-  <!-- MDB -->
   <script type="text/javascript" src="js/mdb.min.js"></script>
-  <!-- Custom scripts -->
   <script type="text/javascript"></script>
 </body>
 

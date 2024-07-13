@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 
 
+<?php 
+session_start();
+// Checck whether session is set 
+if(!isset($_SESSION['theater_ID'])) {
+    header("Location: loginPage.php");
+}
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,20 +21,20 @@
         <h2>Admin Panel</h2>
         <ul>
             <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Customers</a></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">Orders</a></li>
+            <li><a href="./addMovies.php">Add Movies</a></li>
+            <li><a href="#">List Movies</a></li>
+<!--            <li><a href="#">Orders</a></li>
             <li><a href="#">Inventory</a></li>
             <li><a href="#">Accounts</a></li>
-            <li><a href="#">Tasks</a></li>
+            <li><a href="#">Tasks</a></li>-->
         </ul>
     </div>
     <div class="content">
         <div class="header">
-            <div class="title">Dashboard</div>
+            <div class="title" style="margin-left: 5%;"><h2><?php echo $_SESSION['name']; ?></h2></div>
             <div class="user-info">
-                <img src="user.jpg" alt="User" width="40" height="40">
-                <div>Sachindu Kavishka</div>
+                <img src="img/profile-circle.svg" alt="User" width="40" height="40">
+                <div><?php echo $_SESSION['admin_email'] ?></div>
             </div>
         </div>
         <div class="cards">
@@ -47,36 +55,36 @@
                 <p>Tasks</p>
             </div>
         </div>
-        <div class="projects">
-            <h2>Top Selling Projects</h2>
+        <div class="projects" style="margin: 10%">
+            <h2>Theater Details</h2>
             <table>
-                <thead>
-                    <tr>
-                        <th>Company</th>
-                        <th>Contact</th>
-                        <th>Country</th>
-                    </tr>
-                </thead>
+           
                 <tbody>
                     <tr>
-                        <td>Alfreds Futterkiste</td>
-                        <td>Maria Anders</td>
-                        <td>Germany</td>
+                        <td>Theater ID</td>
+                        <td><?php echo $_SESSION['theater_ID'] ?></td>
+                 
                     </tr>
                     <tr>
-                        <td>Centro comercial Moctezuma</td>
-                        <td>Francisco Chang</td>
-                        <td>Mexico</td>
+                        <td>Theater Name</td>
+                        <td><?php echo $_SESSION['name'] ?></td>
+            
                     </tr>
                     <tr>
-                        <td>Ernst Handel</td>
-                        <td>Roland Mendel</td>
-                        <td>Austria</td>
+                        <td>Location</td>
+                        <td><?php echo $_SESSION['location'] ?></td>
+          
                     </tr>
                     <tr>
-                        <td>Island Trading</td>
-                        <td>Helen Bennett</td>
-                        <td>UK</td>
+                        <td>Admin Email</td>
+                        <td><?php echo $_SESSION['admin_email'] ?>t</td>
+                  
+                    </tr>
+                    
+                    <tr>
+                        <td>Ticket Price</td>
+                        <td>LKR <?php echo $_SESSION['ticket_price'] ?></td>
+                  
                     </tr>
                 </tbody>
             </table>
