@@ -1,5 +1,5 @@
 .add-movie * {
-    
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .add-movie .row {
@@ -13,7 +13,7 @@
 
 .add-movie .column {
     width: 48%;
-    height: 500px;
+    height: fit-content;
     margin: 5px;
     justify-content: space-evenly;
     display:flex;
@@ -34,6 +34,9 @@
     width: 340px;
     height: 450px;
     background-color: #1E1E1E;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .add-movie input {
@@ -46,8 +49,8 @@
     color: white;
 }
 
-.add-movie input:active {
-    border: 0;
+.add-movie input:focus-visible {
+    outline: 0;
 }
 
 .add-movie label {
@@ -56,7 +59,8 @@
     font-weight: bold;
 }
 
-.add-movie textarea {
+.add-movie textarea, textarea:focus-visible {
+    outline: 0;
     background-color: #1E1E1E;
     border: 0;
     font-size: 15px;
@@ -66,7 +70,11 @@
     color: white;
 }
 
-.add-movie .save-btn {
+.add-movie input[type=file] {
+    margin-top: 5px;
+}
+
+.add-movie .save-btn, .btn {
     background-color: #008698;
     border: 0;
     border-radius: 6px;
@@ -78,7 +86,7 @@
 }
 
 .add-movie .save-btn-row {
-    
+    margin-left: 50px;
     justify-content: flex-end;
 }
 
@@ -86,12 +94,37 @@
     margin-top: 10px;
     justify-content: flex-start;
     align-items: center;
-    width: 70%;
+    width: 95%;
 }
 
 .add-movie .cover-image {
     background-color: #1E1E1E;
     width: 100%;
-    height: 300px;
+    aspect-ratio: 3;
     border-radius: 10px;
+}
+
+.add-movie .error-row {
+    display: flex;
+    flex: 1 1 0;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 10px 30px;
+    /* background-color: red; */
+}
+
+.time-slot-row {
+    margin: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.time-slot-row input {
+    width: 100px;
+}
+
+.column > .min-column {
+    margin-top: 20px;
 }
