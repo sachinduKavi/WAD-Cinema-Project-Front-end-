@@ -56,8 +56,8 @@ if(isset($_GET['movieID'])) {
         <h2>Admin Panel</h2>
         <ul>
             <li><a href="./dashboard.php">Dashboard</a></li>
-            <li><a href="#">Add Movies</a></li>
-            <li><a href="#">List Movies</a></li>
+            <li><a href="./addMovies.php">Add Movies</a></li>
+            <li><a href="./listMovies.php">List Movies</a></li>
    
         </ul>
     </div>

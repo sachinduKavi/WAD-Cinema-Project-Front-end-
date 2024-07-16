@@ -56,6 +56,31 @@ class Movie {
         $this->genre = $result['genre'];
     }
 
+    // Load all movies related to theater ID
+    public static function loadAllMovies($theaterID) {
+        $stmt = DbConnection::getConnection()->prepare('SELECT movie.movie_ID, name, duration, language, summary, rating, img_link, cover_link, genre FROM movie INNER JOIN movie_theater ON movie_theater.movie_ID = movie.movie_ID WHERE theater_ID = ? ORDER BY movie.movie_ID DESC');
+        $stmt->execute(array($theaterID));
+
+        $results = $stmt->fetchAll();
+
+        $movieList = array();
+        foreach($results as $row) {
+            $movieList[] = (new Movie(
+                $row['movie_ID'],
+                $row['name'],
+                $row['duration'],
+                $row['language'],
+                $row['summary'],
+                $row['rating'],
+                $row['img_link'],
+                $row['cover_link'],
+                $row['genre']
+            ));
+        }
+
+        return $movieList;
+    }
+
     
     public function getMovieID() {
         return $this->movieID;

@@ -22,7 +22,7 @@ if(!isset($_SESSION['theater_ID'])) {
         <ul>
             <li><a href="#">Dashboard</a></li>
             <li><a href="./addMovies.php">Add Movies</a></li>
-            <li><a href="#">List Movies</a></li>
+            <li><a href="./listMovies.php">List Movies</a></li>
 <!--            <li><a href="#">Orders</a></li>
             <li><a href="#">Inventory</a></li>
             <li><a href="#">Accounts</a></li>

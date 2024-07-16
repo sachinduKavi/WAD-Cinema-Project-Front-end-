@@ -41,6 +41,10 @@ if(isset($_POST['name']) && isset($_POST['duration']) && isset($_POST['language'
                     $_POST['genre']
                 ));
 
+                // Updating movie theater table
+                $stmt = $conn->prepare('INSERT INTO movie_theater(movie_ID, theater_ID) VALUES (?, ?)');
+                $stmt->execute(array($movieID, $theaterID));
+
                 // Updating movie time tables
                 $timeArray = explode(',', $_POST['time-array']);
                 foreach($timeArray as $time) {
