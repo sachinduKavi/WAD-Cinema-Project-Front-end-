@@ -40,11 +40,11 @@ if(!isset($_SESSION['theater_ID'])) {
         <div class="cards">
             <div class="card">
                 <h3>67</h3>
-                <p>Customers</p>
+                <p>Live Movies</p>
             </div>
             <div class="card">
                 <h3>88</h3>
-                <p>Projects</p>
+                <p>Reservations</p>
             </div>
             <div class="card">
                 <h3>99</h3>
@@ -52,7 +52,7 @@ if(!isset($_SESSION['theater_ID'])) {
             </div>
             <div class="card">
                 <h3>78</h3>
-                <p>Tasks</p>
+                <p>Seats</p>
             </div>
         </div>
         <div class="projects" style="margin: 10%">

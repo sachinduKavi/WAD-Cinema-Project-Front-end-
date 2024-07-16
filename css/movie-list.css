@@ -41,3 +41,18 @@
     text-decoration: none;
     color: white;
 }
+
+.error-row {
+    width: 90%;
+    padding: 0 50px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.small-banner {
+    width: 80%;
+    height: 50px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+}

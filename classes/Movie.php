@@ -11,6 +11,9 @@
  * @author Sachindu Kavishka
  */
 require 'DbConnection.php';
+// session_start();
+
+
 
 
 class Movie {
@@ -25,6 +28,8 @@ class Movie {
     private $coverLink;
     private $genre;
     private $conn;
+
+    
     
     public function __construct($movieID = null, $name = null, $duration = null, $language = null, $summary = null, $rating = null, $imgLink = null, $coverLink = null, $genre = null) {
         $this->movieID = $movieID;
@@ -38,6 +43,10 @@ class Movie {
         $this->genre = $genre;
 
         $this->conn = DbConnection::getConnection();
+    }
+
+    public static function getTheaterID() {
+        return isset($_SESSION['theater_ID']) ? $_SESSION['theater_ID'] : null;
     }
 
 
@@ -79,6 +88,14 @@ class Movie {
         }
 
         return $movieList;
+    }
+
+    public function loadMovieStatus() {
+        $stmt = $this->conn->prepare('SELECT active from movie_time WHERE movie_ID = ? AND theater_ID = ? LIMIT 1');
+        $stmt->execute(array($this->movieID, Movie::getTheaterID()));
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['active'];
     }
 
     

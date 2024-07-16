@@ -9,6 +9,28 @@ if(!isset($_SESSION['theater_ID'])) {
     header("Location: loginPage.php");
 }
 
+
+if(isset($_GET['message'])) {
+    $message = $_GET['message'];
+} else {
+    $message = "";
+}
+
+if(isset($_GET['type'])) {
+    switch($_GET['type']) {
+        case 'error':
+            $color = 'red';
+            break;
+        case 'success':
+            $color = '#28a745';
+            break;
+        default:
+            $color = 'transparent';
+    }
+} else {
+    $color = "transparent";
+}
+
 // Load all the movies
 $movieList = Movie::loadAllMovies($_SESSION['theater_ID']); 
 ?>
@@ -47,7 +69,17 @@ $movieList = Movie::loadAllMovies($_SESSION['theater_ID']);
          
     </div>
 
+    
+
     <div class="movie-container">
+
+      
+            <div class="error-row" style='border: <?php echo "2px solid ".$color?>'>
+                <h4 style='color: <?php echo $color?>'><?php echo $message ?></h4>
+            </div>
+
+         
+
 
         <?php
             $counter = 0;
@@ -77,12 +109,16 @@ $movieList = Movie::loadAllMovies($_SESSION['theater_ID']);
                 </div>
 
                 <div class="cols" style='flex-basis: calc(10%)'>
-                    <h4>ACTIVE</h4>
+                <a href="server/updateMovieStatus.php?movieID=<?php echo $movie->getMovieID() ?>">
+                    <?php echo $movie->loadMovieStatus() ? "<h4 style='color: #00E641'>ACTIVE</h4>": "<h4 style='color: red'>INACTIVE</h4>" ?>
+                </a>
                 </div>
 
 
                 <div class="cols" style='flex-basis: calc(10%); align-items: flex-end'>
-                    <img src="img/Delete.png" alt="delete-icon" width='25px'>
+                    
+                    <img src="img/Delete.png" alt="delete-icon" width='25px' onclick='deleteMovie("<?php echo $movie->getMovieID() ?>", "<?php echo $movie->getName() ?>")'>
+                    
                 </div>
         
             </div>
@@ -95,4 +131,23 @@ $movieList = Movie::loadAllMovies($_SESSION['theater_ID']);
 
     </div>
 </body>
+
+<script>
+    // Remove the notification message in 5 seconds 
+    if(window.location.href != 'http://localhost/CinemaReserve/listMovies.php') {
+        setTimeout(() => {
+            window.location.href = "./listMovies.php"
+        }, 5000);
+    }
+
+    
+
+    function deleteMovie(movieID, movieName) {
+        if(window.confirm(`Are you sure you want to remove the movie ${movieName} from the database ?`)) {
+            // User confirm for the deletion 
+            window.location.href = `server/deleteMovie.php?movieID=${movieID}`;
+        }
+
+    }
+</script>
 </html>
