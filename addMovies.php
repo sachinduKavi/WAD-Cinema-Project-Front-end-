@@ -23,6 +23,9 @@ if(isset($_GET['type'])) {
         case 'success':
             $color = '#28a745';
             break;
+        case 'warning':
+            $color = '#FFA500';
+            break;
         default:
             $color = 'transparent';
     }
@@ -34,9 +37,11 @@ if(isset($_GET['type'])) {
 if(isset($_GET['movieID'])) {
     $movie = new Movie($_GET['movieID']);
     $movie->fetchAllData();
+    $server='server/updateMovie.php';
     
 }else {
     $movie = null;
+    $server = "server/saveMovie.php";
  }
 ?>
 
@@ -69,7 +74,7 @@ if(isset($_GET['movieID'])) {
                 <div><?php echo $_SESSION['admin_email'] ?></div>
             </div>
         </div>
-        <form action='server/saveMovie.php' method='post' enctype="multipart/form-data">
+        <form action='<?php echo $server ?>' method='post' enctype="multipart/form-data">
 
         <div class="row save-btn-row">
             <div class="error-row" style='border: <?php echo "2px solid ".$color?>'>
@@ -136,6 +141,7 @@ if(isset($_GET['movieID'])) {
         <div class="time-slot-row">
             <input type="time" id='time-slot'>
             <input type="text" id='time-array' style='visibility:hidden; width:20px;' name='time-array'>
+            <input type="text" id='' style='visibility:hidden; width:20px;' name='movie-id' value='<?php echo $movie != null? $movie->getMovieID() :'' ?>'>
             
             <button class='btn' type='button' onclick='addTimeSlot()'>ADD</button>
 

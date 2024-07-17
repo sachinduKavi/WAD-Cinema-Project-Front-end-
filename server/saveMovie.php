@@ -59,10 +59,6 @@ if(isset($_POST['name']) && isset($_POST['duration']) && isset($_POST['language'
                     ));
                 }
 
-                
-
-
-
 
                 echo $a;
                 if($a > 0) {
