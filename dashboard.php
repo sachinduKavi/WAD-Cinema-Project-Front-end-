@@ -23,7 +23,7 @@ if(!isset($_SESSION['theater_ID'])) {
             <li><a href="#">Dashboard</a></li>
             <li><a href="./addMovies.php">Add Movies</a></li>
             <li><a href="./listMovies.php">List Movies</a></li>
-<!--            <li><a href="#">Orders</a></li>
+<!--        <li><a href="#">Orders</a></li>
             <li><a href="#">Inventory</a></li>
             <li><a href="#">Accounts</a></li>
             <li><a href="#">Tasks</a></li>-->
@@ -51,7 +51,7 @@ if(!isset($_SESSION['theater_ID'])) {
                 <p>Orders</p>
             </div>
             <div class="card">
-                <h3>78</h3>
+                <h3><?php echo $_SESSION['no_seats']; ?></h3>
                 <p>Seats</p>
             </div>
         </div>

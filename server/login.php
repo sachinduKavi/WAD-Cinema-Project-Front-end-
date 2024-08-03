@@ -33,6 +33,8 @@ if(isset($_POST['email']) && isset($_POST['password']) && strlen($_POST['email']
         $_SESSION['ticket_price'] = $passResult['ticket_price'];
         $_SESSION['admin_email'] = $passResult['admin_email'];
         
+        
+        
         // Setting user token 
         setcookie("user_token", json_encode($passResult), time()+86400, '/');
         

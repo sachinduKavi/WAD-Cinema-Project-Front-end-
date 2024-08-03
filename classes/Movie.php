@@ -27,11 +27,12 @@ class Movie {
     private $imgLink;
     private $coverLink;
     private $genre;
-    private $conn;
+    public $conn = null;
+    private $active;
 
     
     
-    public function __construct($movieID = null, $name = null, $duration = null, $language = null, $summary = null, $rating = null, $imgLink = null, $coverLink = null, $genre = null) {
+    public function __construct($movieID = null, $name = null, $duration = null, $language = null, $summary = null, $rating = null, $imgLink = null, $coverLink = null, $genre = null, $active = null) {
         $this->movieID = $movieID;
         $this->name = $name;
         $this->duration = $duration;
@@ -41,9 +42,13 @@ class Movie {
         $this->imgLink = $imgLink;
         $this->coverLink = $coverLink;
         $this->genre = $genre;
+        $this->active = $active;
+   
 
         $this->conn = DbConnection::getConnection();
     }
+    
+    
 
     public static function getTheaterID() {
         return isset($_SESSION['theater_ID']) ? $_SESSION['theater_ID'] : null;
@@ -89,6 +94,60 @@ class Movie {
 
         return $movieList;
     }
+    
+    
+    public static function loadActiveMovie($connection) {
+        $movieArray = array();
+        $stmt = $connection->prepare("SELECT DISTINCT movie.movie_ID, img_link FROM movie JOIN movie_time ON movie.movie_ID = movie_time.movie_ID WHERE active = '1'");
+        $stmt->execute();
+        
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+       
+        foreach($results as $record) {
+            $movieArray[] = new Movie(
+                    $record['movie_ID'],
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    $record['img_link'],
+                    null,
+                    null,
+                    null
+            );
+            
+        }
+        
+        return $movieArray;
+    }
+    
+    
+    public static function loadInactiveMovies($connection) {
+        $movieArray = array();
+        $stmt = $connection->prepare("SELECT DISTINCT movie.movie_ID, img_link FROM movie JOIN movie_time ON movie.movie_ID = movie_time.movie_ID WHERE active = '0'");
+        $stmt->execute();
+        
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+       
+        foreach($results as $record) {
+            $movieArray[] = new Movie(
+                    $record['movie_ID'],
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    $record['img_link'],
+                    null,
+                    null,
+                    null
+            );
+            
+        }
+        
+        return $movieArray;
+    }
 
     public function loadMovieStatus() {
         $stmt = $this->conn->prepare('SELECT active from movie_time WHERE movie_ID = ? AND theater_ID = ? LIMIT 1');
@@ -98,6 +157,16 @@ class Movie {
         return $result['active'];
     }
 
+    
+    
+    public function getActive() {
+        return $this->active;
+    }
+    
+    
+    public function setActive($active) {
+        $this->active = $active;
+    }
     
     public function getMovieID() {
         return $this->movieID;
