@@ -34,6 +34,21 @@ class Movie
         $this->conn = DbConnection::getConnection();
     }
     
+    public function extractJSON() {
+        return json_encode(array(
+            "movieID" => $this->movieID,
+            "name"=> $this->name,
+            "duration"=> $this->duration,
+            "language"=> $this->language,
+            "summary"=> $this->summary,
+            "rating" => $this->rating,
+            "imgLink"=> $this->imgLink,
+            "coverLink"=> $this->coverLink,
+            "genre"=> $this->genre,
+            "active"=> $this->active
+        ));
+    }
+    
     
 
     public static function getTheaterID() {

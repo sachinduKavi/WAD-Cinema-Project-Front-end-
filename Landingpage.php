@@ -26,22 +26,35 @@
 
 
 <body>
-    <section class="header-sec">
+    <section class="header-sec" style='background: url(images/movie.jpg);'>
         <div class="nav-div">
-            <div class="sec-0"><img src="../images/1.png" alt="" class="logo"></div>
+            <div class="sec-0"><img src="images/1.png" alt="" class="logo"></div>
             <div class="sec-1">
                 <nav class="nav-items">
-                    <a href="">Trailer</a>
                     <a href="">Movies</a>
                     <a href="">Contact</a>
-                    <a href="">Offers</a>
                 </nav>
             </div>
             <div class="sec-2">
-                <div class="sec-1-child"><i class="fa-solid fa-location-dot"></i> Location</div>
                 <div class="sec-1-child"><button class="login-btn">Login</button></div>
             </div>
-        </div>    
+        </div>  
+        <div style="color: white; 
+             align-items: center; 
+             justify-content: center; 
+             text-align: center; 
+             display: flex; 
+             flex-direction: column;
+             width: 70%;
+             height: fit-content;
+             border-radius: 10px;
+             background-color: #00000090;
+             margin-top: 250px;">
+            
+            <h1 style="font-size: 100px; font-weight: 500; ">Welcome to Cine</h1>
+                <h3 style="font-size: 50px; font-weight: 500; ">All Movie</h3>
+                <h4 style="font-size: 30px; font-weight: 500; ">in one hand</h4>
+            </div>
     </section>
     <section class="body">
         <div class="container1">
@@ -129,6 +142,9 @@
         </div>
         <script src="script.js"></script>
     </section>
+    
+    
+    
     <section class="footer">
         <div class="footer-main-div">
             <div class="middle-div">

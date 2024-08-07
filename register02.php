@@ -48,7 +48,7 @@
               <div class="col-md-6 col-lg-7 d-flex align-items-center">
                 <div class="card-body p-4 p-lg-5 text-black">
   
-                  <form method="post" action="server/login.php">
+                  <form method="post" action="server/registerProcess.php">
   
                     <div class="d-flex align-items-center mb-3 pb-1">
                       <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
@@ -58,7 +58,7 @@
                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Register Into Movie Assistant Panel</h5>
   
                     <div class="form-outline mb-4">
-                      <input type="email" id="form2Example17" class="form-control form-control-lg" name="theatername"/>
+                      <input type="text" id="form2Example17" class="form-control form-control-lg" name="theatername"/>
                       <label class="form-label" for="form2Example17">Theater name</label>
                     </div>
                     
@@ -77,7 +77,9 @@
                       <label class="form-label" for="form2Example27">Ticket price</label>
                     </div>
                     
-
+                    
+                    <input type="hidden" name='password' value='<?php echo $_POST['pass1'] ?>'>
+                    <input type="hidden" name='email' value='<?php echo $_POST['email'] ?>'>
                     
                     <div>
                         <?php echo $message; ?>
@@ -88,7 +90,7 @@
                     </div>
   
                     <a class="small text-muted" href="#">Forgot password?</a>
-                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Already have an account ? <a href="#!" style="color: #393f81;">Login here</a></p>
+                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Already have an account ? <a href="loginPage.php" style="color: #393f81;">Login here</a></p>
                     <a href="#!" class="small text-muted">Terms of use.</a>
                     <a href="#!" class="small text-muted">Privacy policy</a>
                   </form>

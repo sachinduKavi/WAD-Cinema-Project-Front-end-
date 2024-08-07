@@ -30,7 +30,7 @@ if(isset($_POST['name']) && isset($_POST['duration']) && isset($_POST['language'
                 $stmt = $conn->prepare('UPDATE movie SET cover_link = ? WHERE movie_ID = ?');
                 $stmt->execute(array($cover_link, $movieID));
             } 
-
+            
 
             // Updating values in the database 
             $stmt = $conn->prepare("UPDATE movie SET name = ?, duration = ?, language = ?, summary = ?, rating = ?, genre = ? WHERE movie_ID = ?");
@@ -41,7 +41,7 @@ if(isset($_POST['name']) && isset($_POST['duration']) && isset($_POST['language'
                 $_POST['summary'],
                 $_POST['rating'],
                 $_POST['genre'],
-                $_POST['movie-id'],
+                $_POST['movie-id']
             ));
 
             if($a > 0) {

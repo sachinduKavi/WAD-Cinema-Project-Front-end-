@@ -1,12 +1,14 @@
 <?php
 // Include necessary files and start session
 require './classes/Movie.php';
+
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
+echo print_r($_POST)." ".print_r($_SESSION);
 // Handle form submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['auth'])) {
     $name = $_POST['name'];
     $contactNumber = $_POST['contactNumber'];
     $nic = $_POST['nic'];
@@ -28,12 +30,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Assume $_SESSION['seats'] is already set somewhere in your application
-$seats = isset($_SESSION['seats']) ? $_SESSION['seats'] : ['A1', 'A2', 'A3'];
+$seats = isset($_POST['seats']) ? $_POST['seats'] : ['A1', 'A2', 'A3'];
 $seatCount = count($seats);
 $seatNames = implode(', ', $seats);
 
 // Assume the theater ID is stored in the session
-$theaterID = "T004";
+$sessionTheater = $_SESSION['theater'];
+$theaterID = $sessionTheater->;
 
 // Create a Movie object and fetch the ticket price for the current theater
 $price = new Movie();

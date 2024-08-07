@@ -1,143 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php
-session_start();
-require_once 'classes/Movie.php';
+    <?php
+    session_start();
+    require_once 'classes/Movie.php';
+    require 'classes/Theater.php';
 
-if(isset($_GET['movieID'])) {
-    $movie = new Movie($_GET['movieID']);
-    $movie->fetchAllData();
-    
-    
-} else {
-    header('Location: Landingpage.php');
-}
+    if (isset($_GET['movieID'])) {
+        $movie = new Movie($_GET['movieID']);
+        $movie->fetchAllData();
 
-?>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/TheatreList.css">
-    <link rel="stylesheet" href="Footer/Footer.css">
+        $theaterArray = Theater::loadAllTheaters();
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        $_SESSION['movie'] = $movie->extractJSON();
+    } else {
+        header('Location: Landingpage.php');
+    }
+    ?>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="css/TheatreList.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+              integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+              crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-</head>
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+    </head>
 
 
-<body>
-    <section class="header-sec" style='background: url("server/<?php echo $movie->getCoverLink() ?>"); background-size: cover; background-repeat: no-repeat; background-positioin: center;'>
-        <div class="nav-div">
-            <div class="sec-0"><img src="images/1.png" alt="" class="logo"></div>
-            <div class="sec-1">
-                <nav class="nav-items">
-                    <a href="">Trailer</a>
-                    <a href="">Movies</a>
-                    <a href="">Contact</a>
-                    <a href="">Offers</a>
-                </nav>
-            </div>
-            <div class="sec-2">
-                <div class="sec-1-child"><button class="login-btn">Login</button></div>
-            </div>
-        </div>
-
-
-
-        <div class="movie-image-div" >
-            <div class="part">
-                <div class="container-1">
-                    <div class="image">
-                    </div>
+    <body>
+        <section class="header-sec" style='background: url("server/<?php echo $movie->getCoverLink() ?>"); background-size: cover; background-repeat: no-repeat; background-positioin: center;'>
+            <div class="nav-div">
+                <div class="sec-0"><img src="images/1.png" alt="" class="logo"></div>
+                <div class="sec-1">
+                    <nav class="nav-items">
+                        <a href="">Movies</a>
+                        <a href="">Contact</a>
+                    </nav>
                 </div>
-                <div class="container-2">
-                    <div class="colum-1"><span class="movie-name"><?php echo $movie->getName() ?></span></div>
-                    <div class="colum-2"><span class="language"><?php echo $movie->getLanguage() ?></span></div>
+                <div class="sec-2">
+                    <div class="sec-1-child"><button class="login-btn">Login</button></div>
+                </div>
+            </div>
 
-                    <div class="du">
-                        <div class="colum-3">
-                            <div class="one"><?php echo $movie->getGenre() ?></div>
+
+            <div class="movie-image-div" >
+                <div class="part">
+                    <div class="container-1">
+
+                    </div>
+                    <div class="container-2" 
+                         style="
+                         padding-left: 20px;
+                         width: 700px;
+                         margin: 0;
+                         color: white;
+                         display: flex;
+                         flex-direction: column;
+                         height: fit-content;
+                         border-radius: 10px;
+                         background-color: #00000090;
+                         ">
+
+                        <div class="colum-1"><span class="movie-name"><?php echo $movie->getName() ?></span></div>
+                        <div class="colum-2"><span class="language"><?php echo $movie->getLanguage() ?></span></div>
+
+                        <div class="du">
+                            <div class="colum-3">
+                                <div class="one"><?php echo $movie->getGenre() ?></div>
+                            </div>
+                            <span class="language"><?php echo $movie->getDuration() ?> Minutes</span>
                         </div>
-                        <span class="language"><?php echo $movie->getDuration() ?> Minutes</span>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </section>
 
     <div class="date-order">
         <section class="summary-sec">
             <div class="top">
-                <button class="day" onclick="daySelection('<?php echo date("Y-m-d");?>')">
-                    <?php echo date('Y-m-d');?>
+                <button class="day" id="day01" onclick="daySelection('<?php echo date("Y-m-d"); ?>', 'day01')">
+                    <?php echo date('Y-m-d'); ?>
                 </button>
 
-                <button class="day" onclick="daySelection('<?php echo date("Y-m-d", strtotime("+1 day"));?>')">
-                    <?php echo date('Y-m-d', strtotime("+1 day"));?>
+                <button class="day" id="day02" onclick="daySelection('<?php echo date("Y-m-d", strtotime("+1 day")); ?>', 'day02')">
+                    <?php echo date('Y-m-d', strtotime("+1 day")); ?>
                 </button>
 
-                <button class="day" onclick="daySelection('<?php echo date("Y-m-d", strtotime("+2 day"));?>')">
-                    <?php echo date('Y-m-d', strtotime("+2 day"));?>
+                <button class="day" id="day03" onclick="daySelection('<?php echo date("Y-m-d", strtotime("+2 day")); ?>', 'day03')">
+                    <?php echo date('Y-m-d', strtotime("+2 day")); ?>
                 </button>
 
-                <button class="day" onclick="daySelection('<?php echo date("Y-m-d", strtotime("+3 day"));?>')">
-                    <?php echo date('Y-m-d', strtotime("+3 day"));?>
+                <button class="day" id="day04" onclick="daySelection('<?php echo date("Y-m-d", strtotime("+3 day")); ?>', 'day04')">
+                    <?php echo date('Y-m-d', strtotime("+3 day")); ?>
                 </button>
             </div>
         </section>
     </div>
 
     <section class="theatre">
-        <div class="theatre-name">
-            <img src="images/Theatre Mask.png" alt="">
-            <div class="name">
-                <h3>Regal Cinemas</h3>
-                <h4>Marino mall Colombo</h4>
-            </div>
-            <button class="time">
-                06.15 p.m
-            </button>
-            <button class="time">
-                10.15 p.m
-            </button>
-        </div>
+        <?php
+        foreach ($theaterArray as $theater) {
+            ?>
 
-        <div class="theatre-name">
-            <img src="images/Theatre Mask.png" alt="">
-            <div class="name">
-                <h3>Regal Cinemas</h3>
-                <h4>Marino mall Colombo</h4>
+            <div class="theatre-name">
+                <img src="images/Theatre Mask.png" alt="">
+                <div class="name">
+                    <h3><?php echo $theater->getName() ?></h3>
+                    <h4><?php echo $theater->getLocation() ?></h4>
+                </div>
+                <button class="time" onclick='nextPage("<?php echo $theater->getTheaterID() ?>", "10:30AM")'>
+                    10:30 AM
+                </button>
+                <button class="time" onclick="nextPage('<?php echo $theater->getTheaterID() ?>', '4:00PM')">   
+                    4.00 PM
+                </button>
             </div>
-            <button class="time">
-                06.15 p.m
-            </button>
-            <button class="time">
-                10.15 p.m
-            </button>
-        </div>
 
-        <div class="theatre-name">
-            <img src="images/Theatre Mask.png" alt="">
-            <div class="name">
-                <h3>Regal Cinemas</h3>
-                <h4>Marino mall Colombo</h4>
-            </div>
-            <button class="time">
-                06.15 p.m
-            </button>
-            <button class="time">
-                10.15 p.m
-            </button>
-        </div>
+        <?php } ?>
+
+    </section>
+
+    <section class="book">
+        <div class="sec-1-child"><button class="login-btn">Book</button></div>
     </section>
 
 
@@ -185,15 +180,34 @@ if(isset($_GET['movieID'])) {
         </div>
     </div>
 
+    <input type="hidden" value="" id="selectedDate"/>
+
 
 
 
 
 </body>
 <script>
-function daySelection(selectedDay) {
-    console.log(selectedDay)
-}
- 
+    let selection = ""
+    function daySelection(selectedDay, id) {
+        selection = selectedDay
+        console.log(selectedDay)
+        let dayClass = document.getElementsByClassName('day');
+        for (let i = 0; i < dayClass.length; i++) {
+            dayClass[i].style.backgroundColor = 'white';
+        }
+        console.log(id)
+        document.getElementById(id).style.backgroundColor = 'green';
+        document.getElementById('selectedDate').value = selectedDate;
+        toastr.info('Day Selected')
+    }
+
+    function nextPage(theaterID, time) {
+        if (selection.length > 0)
+            document.location.href = "Seatselection.php?theaterID=" + theaterID + "&date=" + selection + "&time=" + time
+        else
+            window.alert("Please chose a prefered date")
+    }
+
 </script>
 </html>

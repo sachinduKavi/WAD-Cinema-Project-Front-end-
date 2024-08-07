@@ -3,17 +3,12 @@
 <?php
 require 'classes/Movie.php';
 
-if(isset($_GET['movieID'])) {
-    
-    
+if(isset($_GET['movieID'])) {    
     $movie = new Movie($_GET['movieID']);
-    $movie->fetchAllData();
-    
-    
+    $movie->fetchAllData();    
 } else {
     header('Location: Landingpage.php');
 }
-
 
 ?>
     
@@ -42,10 +37,8 @@ if(isset($_GET['movieID'])) {
             <div class="sec-0">LOGO</div>
             <div class="sec-1">
                 <nav class="nav-items">
-                    <a href="">Trailer</a>
                     <a href="">Movies</a>
                     <a href="">Contact</a>
-                    <a href="">Offers</a>
                 </nav>
             </div>
             <div class="sec-2">

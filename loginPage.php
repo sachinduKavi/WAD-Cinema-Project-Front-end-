@@ -5,9 +5,10 @@
         if($_GET['message'] == 'invalidPass') {
             $message = '<p style="color:red">**Invalid email or password</p>';
         } else {
-            $message = '<p style="color:red">**Missing emaill or password</p>';
+          $get = $_GET['message'];
+            $message = "<p style='color:green'>$get</p>";
         }
-       
+            
     } else {
         $message = "";
     }
@@ -17,7 +18,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <title>Material Design for Bootstrap</title>
+  <title>Admin Panel</title>
 
   <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
@@ -71,7 +72,7 @@
                     </div>
   
                     <a class="small text-muted" href="#!">Forgot password?</a>
-                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="#!" style="color: #393f81;">Register here</a></p>
+                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="register01.php" style="color: #393f81;">Register here</a></p>
                     <a href="#!" class="small text-muted">Terms of use.</a>
                     <a href="#!" class="small text-muted">Privacy policy</a>
                   </form>
